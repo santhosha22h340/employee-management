@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard | EMS{% endblock %}
+
+{% block content %}
+
+<div class="topbar">
+
+    <div>
+        <h1>Dashboard</h1>
+        <p>Employee Management Overview</p>
+    </div>
+
+    <div class="profile">
+        👤 Admin
+    </div>
+
+</div>
+
+
+<div class="cards">
+
+    <div class="stat-card blue">
+        <h4>Total Employees</h4>
+        <h2>{{ total_employees }}</h2>
+        <div class="stat-icon">👥</div>
+    </div>
+
+
+    <div class="stat-card green">
+        <h4>Present Today</h4>
+        <h2>{{ present_count }}</h2>
+        <div class="stat-icon">✓</div>
+    </div>
+
+
+    <div class="stat-card red">
+        <h4>Absent Today</h4>
+        <h2>{{ absent_count }}</h2>
+        <div class="stat-icon">✕</div>
+    </div>
+
+
+    <div class="stat-card orange">
+        <h4>Departments</h4>
+        <h2>{{ department_count }}</h2>
+        <div class="stat-icon">🏢</div>
+    </div>
+
+</div>
+
+
+<div class="content-card">
+
+    <div class="section-header">
+
+        <div>
+            <h2>Welcome to Employee Management System</h2>
+            <p style="color:#64748b; margin-top:7px;">
+                Manage employees and daily attendance from one place.
+            </p>
+        </div>
+
+        <a href="{% url 'add_employee' %}"
+           class="btn btn-primary">
+            + Add Employee
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

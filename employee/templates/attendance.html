@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block title %}Attendance | EMS{% endblock %}
+
+{% block content %}
+
+<div class="topbar">
+
+    <div>
+        <h1>Daily Attendance</h1>
+        <p>Mark today's employee attendance</p>
+    </div>
+
+    <a href="{% url 'attendance_history' %}"
+       class="btn btn-secondary">
+        📊 View History
+    </a>
+
+</div>
+
+
+<div class="content-card">
+
+    <div class="section-header">
+
+        <div>
+            <h2>Attendance</h2>
+
+            <p style="color:#64748b; margin-top:5px;">
+                Date: {{ today }}
+            </p>
+        </div>
+
+    </div>
+
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Employee</th>
+                    <th>Department</th>
+                    <th>Designation</th>
+                    <th>Status</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for employee in employees %}
+
+                <tr>
+
+                    <td>#{{ employee.id }}</td>
+
+                    <td>
+                        <strong>
+                            {{ employee.name }}
+                        </strong>
+                    </td>
+
+                    <td>
+                        {{ employee.department }}
+                    </td>
+
+                    <td>
+                        {{ employee.designation }}
+                    </td>
+
+                    <td>
+
+                        <select name="status_{{ employee.id }}"
+                                style="
+                                padding:9px 15px;
+                                border-radius:8px;
+                                border:1px solid #cbd5e1;
+                                ">
+
+                            <option value="Present">
+                                Present
+                            </option>
+
+                            <option value="Absent">
+                                Absent
+                            </option>
+
+                        </select>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+
+        <div style="margin-top:25px;">
+
+            <button type="submit"
+                    class="btn btn-success">
+                ✓ Save Today's Attendance
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+{% endblock %}

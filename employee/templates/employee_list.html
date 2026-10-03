@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block title %}Employees | EMS{% endblock %}
+
+{% block content %}
+
+<div class="topbar">
+
+    <div>
+        <h1>Employees</h1>
+        <p>Manage all employees in your organization</p>
+    </div>
+
+    <a href="{% url 'add_employee' %}"
+       class="btn btn-primary">
+        + Add Employee
+    </a>
+
+</div>
+
+
+<div class="content-card">
+
+    <div class="section-header">
+
+        <h2>Employee List</h2>
+
+        <span style="color:#64748b;">
+            Total: {{ employees|length }}
+        </span>
+
+    </div>
+
+
+    <div style="overflow-x:auto;">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>ID</th>
+                    <th>Employee</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Department</th>
+                    <th>Designation</th>
+                    <th>Joining Date</th>
+                    <th>Actions</th>
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for employee in employees %}
+
+                <tr>
+
+                    <td>#{{ employee.id }}</td>
+
+                    <td>
+                        <strong>{{ employee.name }}</strong>
+                    </td>
+
+                    <td>{{ employee.email }}</td>
+
+                    <td>{{ employee.phone }}</td>
+
+                    <td>{{ employee.department }}</td>
+
+                    <td>{{ employee.designation }}</td>
+
+                    <td>{{ employee.Doj }}</td>
+
+                    <td>
+
+                        <a href="{% url 'edit_employee' employee.id %}"
+                           class="btn btn-warning">
+                            Edit
+                        </a>
+
+                        <a href="{% url 'delete_employee' employee.id %}"
+                           class="btn btn-danger">
+                            Delete
+                        </a>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="8"
+                        style="text-align:center; padding:40px; color:#64748b;">
+
+                        No employees found.
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}
